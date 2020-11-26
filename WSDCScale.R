@@ -26,12 +26,13 @@ WUDC_2018_cleaned <- WUDC_2018 %>%
 # change to numeric to prevent error in ggplot
 WUDC_2018_cleaned$value <- as.numeric(WUDC_2018_cleaned$value)
 
+
 # creates histogram - slight skew to the left in the normal distribution
 ggplot(data = WUDC_2018_cleaned, aes(x = value)) +
   geom_histogram(binwidth = 1)
 
 # clean the wsdc data - remove missing speaks, irrelevant columns, and melt dataframe for histogram/subsequent analysis
-WSDC_2020_cleaned <- WSDC_2018 %>%
+WSDC_2020_cleaned <- WSDC_2020 %>%
   select(-Rank, -Country, -`Language Status`, -Avg, -Stdev, -Num) %>%
   melt(id.vars = "Debater Name") %>%
   filter(value != 0 & value != "—") %>%
